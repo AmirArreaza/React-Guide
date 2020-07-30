@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Person from "./Person/Person";
 
-class Persons extends Component {
+class Persons extends PureComponent {
   /*
     static getDerivedStateFromProps(props, state) {
     console.log('[Persons.js] getDerivedStateFromProps')
@@ -13,21 +13,36 @@ class Persons extends Component {
   }
 */
 
-  shouldComponentUpdate(nextProps, nextState){
-    console.log('[Persons.js] shouldComponentUpdate');
-    return true;// If react should continue 
+  /*
+PureComponent implements automatically shouldComponentUpdate a complete props check
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[Persons.js] shouldComponentUpdate ");
+    if (
+      nextProps.persons !== this.props.persons ||
+      nextProps.changed !== this.props.changed ||
+      nextProps.clicked !== this.props.clicked
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+    //return true;// If react should continue
   }
-
-  getSnapshotBeforeUpdate(prevProps, prevState){
-    console.log('[Persons.js] getSnapshotBeforeUpdate');
-    return { message: 'Snapshot!' };
+*/
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log("[Persons.js] getSnapshotBeforeUpdate");
+    return { message: "Snapshot!" };
   }
 
   //componentWillUpdate Should no longer in use
 
-  componentDidUpdate(prevProps, prevState, snapshot){
-    console.log('[Persons.js] componentDidUpdate'); 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("[Persons.js] componentDidUpdate");
     console.log(snapshot);
+  }
+
+  componentWillUnmount() {
+    console.log("[Persons.js] componentWillUnmount");
   }
 
   render() {
